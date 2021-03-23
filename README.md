@@ -1,4 +1,7 @@
-# Example code for a Django / React guide 
+# The template of this project is obtained from
+https://github.com/MattSegal/django-react-guide
+
+## Example code for a Django / React guide 
 
 Example code for a Django / React [setup guide](https://mattsegal.dev/django-react.html)
 
