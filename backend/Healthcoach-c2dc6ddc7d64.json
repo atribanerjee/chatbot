@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "healthcoach-d2d01",
+  "private_key_id": "c2dc6ddc7d642e7b1e9f8b33225dd5c46167582f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDWgmP+spOegjNu\ng0pbDNdBQgW2E15ZuINnzP9pGLqCUk/7Y+88hBe4zElbc0fEp1bbC9XMJfQDwKHY\noEY/sT2fhOvlAbK5hZRJeJ3g9YyfwbMrIzAKPZnqy0R6d+0J6/3C0VSFU424svvX\n7kGtvEUhdIP1LaC3elCVzFgOsg5Lm6uRs4Wcq/WkUbqNwbaYp0cjaTAXO+Etajnq\nPX4UQihSPoLfofghsyHD40c4/54FaoX86fRutDG6XpjFJDcTyRdhoWtpo2LERO17\nb6HqYnScG16j+k8ozYtTv5wSVGRny8B1JymXK6vVFuziiN2Ae1mNZsr6SbPewcx5\naAnOgU8XAgMBAAECggEADnmtEsZtNMCXhOkiLuO+cN5qMT+8WbScVXhdcfOjvmCc\nmhvDzKMjUKqkdqHgYXJjZ5O0YTrcbRZmNY6XPvwQav/WxVTogSF1AMI9cS1QyIUT\nOKF+v+opRVFjNRp7qfQ9YxSqLfcV9LVLTmZ7EyTFy3yn3PcvxcHgx0MLXC6CzXI7\nsHajoGrQk4rqbxlbhogNcnxczWLUqTTpFocvq3RmXPeX+1Kf6o2kEORMuqdxIhRE\nUDpesMhCOR2o5LTaF2rwC3RWSR71Wy0LzDlBTdFSvlHQb7XqDE/dNYQ8T6xJqwQI\nbFbjhhvEh4XnNxphJqlOaw1s2Jr9J39dbCFWJ7gTwQKBgQDr0HfGQMzDqyEWFbwv\nEcNMPg+P2WBEU2shA7wv1AGn9TsiP9qfUn8nsjXFLWoFWi4YdgBRvRP/43YA1InJ\nEUsk/Rw6LbXH6snA1WyzP0CqlUVhKl3CrjrCTBJ/zbJP9mIviTyR0yM/+xZcsR+X\nr41qaLkb2jMQh6YQhM47xaQxVwKBgQDo3w30YQbvJwk5PAj3Zc3l2ikDnf+dbaFO\nIUWzZfXlq9PE8fECx+COdRq7RJ71Da05fOquo3JZS8IDGCADT4HioAE6S7AaP5jt\n4nhaIRiNhxuGbnK9freg3ThdXbEjrajs96YuAi91EUl8TxJ8t+zb0U2SEJ0QFF1p\nCMm3vtB4QQKBgCSgPWoyeFtPwhTPDWp2JNI7tWkPRy91kWcQUHNRR2yR3zxjlI44\nXv2IZWeZtSTdq9kqwsPvTSLqblKUsE3lfLljArZakSha5DkqLPbuNRoJkzwTO3rY\nWtIAxMLK7Q4UY42kkB7KH2h5lDCTZifGIX3MhCu6SUIg/38DUZDhEq6DAoGBALN2\nQsDUjY18neUX2Skfsb+zkuwQtU9Tj34wshCBQTGQbBFZCw3Dj9D5enJbfc0IjzjA\nhfO0Tol2krvjubgTa9uEx61vavWvkWGyqGF9I/jd6F5/e7mBkG5OTgPWEo+WY5rL\nd6v5Ty1+9wzvuyWWcNkuwgMQ/pnHt/0cIqiSSwKBAoGBAKGsndbxK0hkXmq9TVhj\n4uY2mr8zpbY+SpXy5yzHbcRuyL60XYGuhnLRrq5nldabx+YHV0A6chZIzlZgJPha\nwLj9CxSzN91sHs/qf7N0ytHtb8w3XjjhKw3QUZC1n35poJ3kJq7xeYMPy8t1Ak9Y\nZ/MFJrRXYCf+vCyMrdeNteal\n-----END PRIVATE KEY-----\n",
+  "client_email": "speec-730@healthcoach-d2d01.iam.gserviceaccount.com",
+  "client_id": "110014855343418778572",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/speec-730%40healthcoach-d2d01.iam.gserviceaccount.com"
+}
