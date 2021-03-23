@@ -1,0 +1,68 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/styles.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/index.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/App.css' %}" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+
+    <div style="display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    height: 100vh;">
+      <div>
+        <div id="root" style="position: fixed;"></div>
+      </div>
+      
+      <div id="gs-container" style="display: block;"></div>
+      
+    </div>
+
+    <div id="gs-close-button" style="display: none;">
+      <a href="#">
+        <span class="left">
+          <span class="circle-left"></span>
+          <span class="circle-right"></span>
+        </span>
+        <span class="right">
+          <span class="circle-left"></span>
+          <span class="circle-right"></span>
+        </span>
+      </a>
+    </div>
+    
+    
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+
+    <script async src="https://cse.google.com/cse.js?cx=733234c43a3ba69a0"></script>
+    <script src="{% static 'myapp/build/main.js' %}"></script>
+    <script src="{% static 'myapp/build/App.js' %}"></script>
+    <script src="{% static 'myapp/build/googleApi.js' %}"></script>
+    <script src="{% static 'myapp/build/ActionProvider.js' %}"></script>
+    <script src="{% static 'myapp/build/speech.js' %}"></script>
+
+    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+    <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+  </body>
+</html>

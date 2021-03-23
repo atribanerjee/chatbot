@@ -1,0 +1,346 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 99999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 2px 16px;
+  background-color: #23A455;
+  color: white;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Modal Body */
+.modal-body {padding: 8px 16px;}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #23A455;
+  color: white;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  /* border: 1px solid #888; */
+  border-radius: 10px;
+  width: 50%;
+  top: 10%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 10%; opacity: 1}
+}
+
+.quick-button {
+  font-size: medium;
+}
+
+.rcw-new-message {
+  font-size: medium;
+}
+
+/* Speech message */
+.recordingMsg {
+  display:none;
+  position: fixed;
+  color: white;;
+  background-color: slategray;
+  margin: auto;
+  padding: 1%;
+  /* border: 1px solid #888; */
+  top: 20%;
+  left: 45%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatebottom;
+  animation-duration: 0.4s;
+  z-index: 99999;
+}
+
+.rcw-voice {
+  max-height: 35px;
+  max-width: 35px;
+  background: "transparent";
+  border: 0;
+  padding: 0%;
+}
+
+/* Add Animation */
+@keyframes animatebottom {
+  from {top: 10%; opacity: 0}
+  to {top: 20%; opacity: 1}
+}
+
+.gs-result-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: 2%;
+  margin: 5%;
+  max-height: 100vh;
+  /* overflow: auto; */
+}
+
+.gs-result-box {
+  color: black;
+  background-color: white;
+  margin: 2%;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1;
+  /* overflow: auto */
+}
+
+.gs-result-box:hover {
+  -webkit-transform:scale(1.05);
+  -moz-transform:scale(1.05);
+  -o-transform:scale(1.05);
+  transform:scale(1.05);
+  z-index: 2;
+  box-shadow:0 3px 8px 0;
+  /* background-color: lightgrey; */
+}
+
+/* https://css-tricks.com/seamless-responsive-photo-grid/ */
+.gs-image-container {
+  line-height: 1;
+   
+  -webkit-column-count: 3;
+  -webkit-column-gap:   0px;
+  -moz-column-count:    3;
+  -moz-column-gap:      0px;
+  column-count:         3;
+  column-gap:           0px; 
+}
+
+.gs-image-box {
+  position: relative;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.gs-image-text {
+  display: none;
+  position: absolute;
+  bottom: 2%;
+  left: 15%;
+  padding: 2%;
+  opacity: 50%;
+  background-color: black;
+  color: white;
+  width: 60%;
+  border-radius: 6px;
+}
+
+.gs-image:hover {
+  box-shadow:0 3px 8px 0;
+}
+
+.gs-image-box:hover .gs-image-text {
+  display: block;
+}
+
+@media (max-width: 1600px) {
+  .gs-image-container {
+  -moz-column-count:    3;
+  -webkit-column-count: 3;
+  column-count:         3;
+  }
+}
+@media (max-width: 1200px) {
+  .gs-image-container  {
+  -moz-column-count:    2;
+  -webkit-column-count: 2;
+  column-count:         2;
+  }
+}
+@media (max-width: 800px) {
+  .gs-image-container  {
+  -moz-column-count:    1;
+  -webkit-column-count: 1;
+  column-count:         1;
+  }
+}
+@media (max-width: 400px) {
+  .gs-image-container  {
+  -moz-column-count:    1;
+  -webkit-column-count: 1;
+  column-count:         1;
+  }
+}
+
+/* https://codepen.io/mariusgnicula/pen/MpzOoP */
+#gs-close-button a {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 2%;
+  top: 5%;
+  /* margin-top: -50px;
+  margin-right: -50px; */
+  background-color: lightgray;
+  border-radius: 50px;
+  opacity: 1;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-box-shadow: 0px 0px 30px 0px rgba(60, 179, 113, 1);
+  -moz-box-shadow: 0px 0px 30px 0px rgba(60, 179, 113, 1);
+  box-shadow: 0px 0px 30px 0px rgba(60, 179, 113, 1);
+  z-index: 99;
+}
+#gs-close-button a > span {
+  background-color: #0dba86;
+  display: block;
+  height: 6px;
+  border-radius: 6px;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  position: absolute;
+  top: 50%;
+  margin-top: -3px;
+  left: 10px;
+  width: 32px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+}
+#gs-close-button a > span span {
+  display: block;
+  background-color: #0dba86;
+  width: 6px;
+  height: 6px;
+  border-radius: 6px;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#gs-close-button a > span.left {
+  transform: rotate(45deg);
+  transform-origin: center;
+}
+#gs-close-button a > span.left .circle-left {
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin-left: 0;
+}
+#gs-close-button a > span.left .circle-right {
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin-left: 26px;
+}
+#gs-close-button a > span.right {
+  transform: rotate(-45deg);
+  transform-origin: center;
+}
+#gs-close-button a > span.right .circle-left {
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin-left: 0;
+}
+#gs-close-button a > span.right .circle-right {
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin-left: 26px;
+}
+#gs-close-button a:hover > span {
+  background-color: #2faee0;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+#gs-close-button a:hover > span span {
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  background-color: #008ac9;
+}
+#gs-close-button a:hover > span.left .circle-left {
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin-left: 26px;
+}
+#gs-close-button a:hover > span.left .circle-right {
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin-left: 0;
+}
+#gs-close-button a:hover > span.right .circle-left {
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin-left: 26px;
+}
+#gs-close-button a:hover > span.right .circle-right {
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin-left: 0;
+}

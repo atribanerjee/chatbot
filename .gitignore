@@ -1,0 +1,10 @@
+# Django / Python stuff
+env/
+*.pyc
+*.sqlite3
+frontend/node_modules/
+*/__pycache__/*
+.DS_Store
+**/.DS_Store
+.vscode/settings.json
+backend/Healthcoach-c2dc6ddc7d64.json
