@@ -1,7 +1,9 @@
 from django.shortcuts import render
 import speech_recognition as sr
 from django.http import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
 
+@ensure_csrf_cookie
 def index(request):
     return render(request, "myapp/index.html", context={})
 
