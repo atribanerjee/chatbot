@@ -12,7 +12,7 @@ Example code for a Django / React [setup guide](https://mattsegal.dev/django-rea
 
 This branch represents the project before any React stuff has been added.
 
-## Setup instructions
+## Setup instructions for backend
 
 ```bash
 # Enter Django project folder
@@ -26,9 +26,11 @@ pip install -r requirements.txt
 ./manage.py migrate
 ./manage.py runserver
 # Then visit http://localhost:8000
+```
 
+## Setup instructions for frontend
 
-
+```
 # Enter Django project folder
 cd frontend
 # Setup and activate virtualenv
