@@ -56,6 +56,6 @@ npm run dev
 - Audio button
     * has to click on the button again to stop recording
     * not as smooth, might be better to use websocket (the program is currently using polling to get real time transcript)
-    * Mixed content issue: recorder.js used requires https but GPT3 is currently using http. The user has to enable mixed content (can be done on Chrome and Firefox)
+    * Mixed content issue: recorder.js used requires https but GPT3 is currently using http. The user has to enable mixed content in order to make it work (can be done on Chrome and Firefox)
 - Backend:
     * add more feature using the audio data
