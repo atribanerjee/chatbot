@@ -137,27 +137,6 @@ const App = (props) => {
         autofocus={false}
       />
 
-      <div id="myModal" class="modal">
-        <div class="modal-content">
-        <div class="modal-header">
-          <span class="close">&times;</span>
-          <h2>Quick Login</h2>
-        </div>
-        <div class="modal-body">
-          <label for="username">Username:</label>
-          <input type="text" name="userInfo" id="username" placeholder="username" />
-          <br></br>
-          <label for="password">Password:</label>
-          <input type="text" name="userInfo" id="password" placeholder="password" />
-          <br></br>
-          <input class="modal-submit" type="submit" value="Submit" />
-        </div>
-        <div class="modal-footer">
-          <h3></h3>
-        </div>
-        </div>
-      </div>
-
       <span class="recordingMsg">recording</span>
       
     </div>
