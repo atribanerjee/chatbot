@@ -35,4 +35,5 @@ pip install -r requirements.txt
 cd frontend
 # run webpack
 npm run dev
+# the javascript files are located at: backend/myapp/static/myapp/build
 ```
