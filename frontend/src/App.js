@@ -80,6 +80,9 @@ const App = (props) => {
   }
 
   const handleNewUserMessage = (newMessage) => {
+    /*
+    This functino =handle the new message sent from the user/browser
+    */
     toggleMsgLoader();
     console.log(`New message incoming! ${newMessage}`);
     currMessage = newMessage;
