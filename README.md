@@ -1,7 +1,10 @@
 
 # Chatbot
-## The template of this project is obtained from
+## The django template of this project is obtained from
 https://github.com/MattSegal/django-react-guide
+
+## The react chat widget template of this project is obatined from
+https://github.com/Wolox/react-chat-widget
 
 ## Example code for a Django / React guide 
 
