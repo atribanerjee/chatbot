@@ -1,5 +1,13 @@
 
 # Chatbot
+
+This is a web application that implements a chatbot to help the users perform some searching with a more friendly user interface and interaction. It provides a simple answer straight away without having to scroll through all the google search results. In the meantime, provides the option of the top 10 google search results so that the user can go through the websites as well. The user can also click on the "show image" quick button to view some of the images from google search.
+
+## Heroku
+
+A demo is deployed on Heroku.
+Currently working version: https://web-easychat.herokuapp.com/
+
 ## The django template of this project is obtained from
 https://github.com/MattSegal/django-react-guide
 
@@ -47,9 +55,6 @@ npm run dev
 # the javascript files are located at: backend/myapp/static/myapp/build
 ```
 
-## Heroku
-
-Currently working version: https://web-easychat.herokuapp.com/
 
 ## Future improvement
 
