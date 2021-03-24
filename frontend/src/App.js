@@ -40,6 +40,7 @@ const App = (props) => {
     /*
     This function will send the message to the GPT3 server.
     */
+
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -61,7 +62,9 @@ const App = (props) => {
       } else if (xhr.status == 500) {
         if (!gotMessage) {
           console.log(res);
+          // only resend the request if the failed request is not more than 5
           if (failCount < 5) postMessage(message, url);
+          // increment failed counter to keep track of failed requests
           failCount = failCount + 1;
           gotMessage = true;
         }
@@ -80,22 +83,28 @@ const App = (props) => {
     toggleMsgLoader();
     console.log(`New message incoming! ${newMessage}`);
     currMessage = newMessage;
-    // Now send the message throught the backend API
+    // Now send the message to the GPT3 API
     postMessage(newMessage, 'http://ec2-54-165-106-6.compute-1.amazonaws.com:5000/predict_GPT3_tips');
-    // if (debugMode) {
-    //   postMessage(newMessage, 'http://ec2-3-83-253-148.compute-1.amazonaws.com:5000/predict_GPT3_tagging');
-    // }
+    
+    // reset the failed request counter
     failCount = 0;
+
+    // remove the google search container when a new message is sent
     var gsCloseButton = document.getElementById("gs-close-button");
     gsCloseButton.style.display = "none";
     var google = document.getElementById("gs-container");
     google.style.display = "none";
     var widgetContainer = document.getElementsByClassName("rcw-widget-container")[0];
     widgetContainer.style.width = "100%";
+
+    // reset all quich buttons
     setQuickButtons([]);
   };
 
   const handleQuickButtonClicked = (value) => {
+    /*
+    This function will handle the event when a quick button is clicked
+    */
     if (value == 1) {
         
     } else if (value == 2) {
@@ -111,11 +120,13 @@ const App = (props) => {
       // change width of chat window
       var widgetContainer = document.getElementsByClassName("rcw-widget-container")[0];
       widgetContainer.style.width = "50%";
+      
       // Get the google search container
       var gsCloseButton = document.getElementById("gs-close-button");
       gsCloseButton.style.display = "block";
       var google = document.getElementById("gs-container");
       google.style.display = "block";
+      
       setQuickButtons([
         {
         label : 'show images',
