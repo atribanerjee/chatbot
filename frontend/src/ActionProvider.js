@@ -2,6 +2,10 @@ import {addResponseMessage, setQuickButtons} from 'react-chat-widget';
 import {postToGoogle} from './googleApi'
 
 export const ActionProvider = (response, currMessage) => {
+    /*
+    This is the functino that handle the response from GPT3 and determine what the message should
+    be sent to the user.
+    */
     var components = response.split(":");
     if (components[0] == "Tips") {
         postToGoogle(currMessage, false);

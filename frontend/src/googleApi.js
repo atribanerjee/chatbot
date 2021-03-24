@@ -1,4 +1,7 @@
 const renderGoogleSearchResult = (json, searchImage) => {
+  /*
+  This functino will render the google search result on the browser.
+  */
     var gsResultBox = "";
 
     if (!searchImage) {
@@ -24,8 +27,6 @@ const renderGoogleSearchResult = (json, searchImage) => {
             gsResultBox += '<div class="gs-image-box">';
             gsResultBox += '<a style="text-decoration: none; color: inherit;" target="_blank" href=' + item.image.contextLink + ">";
             gsResultBox += '<img class="gs-image" src=' + item.link + ' style="width:100% !important;height:auto !importnat;">';
-            // gsResultBox += "<b>" + item.htmlTitle + "</b>";
-            // gsResultBox += item.displayLink;
             gsResultBox += "<br>" + '<p class="gs-image-text">' + item.displayLink + "</p>";
             gsResultBox += "</a>";
             gsResultBox += "</div>";
@@ -39,8 +40,9 @@ const renderGoogleSearchResult = (json, searchImage) => {
   }
 
   const postToGoogle = (newMessage, searchImage) => {
-    // var currentURL = window.location.protocol + '//' + window.location.host + window.location.pathname;
-    // window.location.assign(currentURL + '?q=' + newMessage);
+    /*
+    This function will post the corresponding message as query arguments to the google api to get the google search result
+    */
 
     var words = newMessage.split(" ");
     const API_key = 'AIzaSyCbFSWl19Os-yEiAVDDVCsjRhx3upg03Tw';

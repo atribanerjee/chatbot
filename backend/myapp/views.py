@@ -8,6 +8,7 @@ def index(request):
     return render(request, "myapp/index.html", context={})
 
 def speech(request):
+    # This function handle the audio file and convert speech to text, then send it back to the browser
     transcript = {}
     if request.method == "POST":
         file = request.FILES['audio_data']
