@@ -37,3 +37,7 @@ cd frontend
 npm run dev
 # the javascript files are located at: backend/myapp/static/myapp/build
 ```
+
+## Heroku
+
+Currently working version: https://web-easychat.herokuapp.com/
