@@ -1,7 +1,7 @@
 
 # Chatbot
 
-This is a web application that implements a chatbot to help the users perform some searching with a more friendly user interface and interaction. It provides a simple answer straight away without having to scroll through all the google search results. In the meantime, provides the option of the top 10 google search results so that the user can go through the websites as well. The user can also click on the "show image" quick button to view some of the images from google search.
+This program is an AI chatbot web application that uses GPT3 to generate a response. The chatbot helps the users perform some searching with a more friendly user interface and interaction. It provides a simple answer straight away without having to scroll through all the Google search results. Also, it displays the top 10 google search results so that the user can go through the websites. The user can also click on the "show image" quick button to view the top 10 images from Google search.
 
 ## Heroku
 
