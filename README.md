@@ -33,9 +33,6 @@ pip install -r requirements.txt
 ```
 # Enter Django project folder
 cd frontend
-# Setup and activate virtualenv
-virtualenv env
-. env/bin/activate
 # Install requirements
 pip install -r requirements.txt
 ```
