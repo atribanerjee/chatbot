@@ -27,3 +27,12 @@ pip install -r requirements.txt
 ./manage.py runserver
 # Then visit http://localhost:8000
 ```
+
+## React js to javascript conversion instructions
+
+```bash
+# Enter Django project folder
+cd frontend
+# run webpack
+npm run dev
+```
