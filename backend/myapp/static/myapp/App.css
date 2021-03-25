@@ -127,7 +127,7 @@
   left: 45%;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  animation-name: animatebottom;
+  animation-name: fade-in;
   animation-duration: 0.4s;
   z-index: 99999;
 }
@@ -141,9 +141,15 @@
 }
 
 /* Add Animation */
-@keyframes animatebottom {
+@keyframes fade-in {
   from {top: 10%; opacity: 0}
   to {top: 20%; opacity: 1}
+}
+
+/* Add Animation */
+@keyframes fade-out {
+  from {top: 20%; opacity: 1}
+  to {top: 10%; opacity: 0}
 }
 
 .gs-result-container {

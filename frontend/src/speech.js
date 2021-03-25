@@ -21,9 +21,17 @@ voiceButton.onclick = recording;
 voiceButton.appendChild(voiceImage);
 rcwSender.insertBefore(voiceButton, rcwSender.firstChild);
 
-var clicked = false;
+
 document.getElementsByClassName('rcw-send')[0].addEventListener("click", function() {
-   clicked = true;
+    rec.stop();
+    isRecording = false;
+
+    // stop microphone access
+    gumStream.getAudioTracks()[0].stop();
+
+    // hide recording message
+    var modal = document.getElementsByClassName("recordingMsg")[0];
+    modal.style.display = "none";
 });
 
 function recording() {
@@ -69,6 +77,10 @@ function recording() {
             rec.record();
             isRecording = true;
             // console.log("Recording started");
+
+            var modal = document.getElementsByClassName("recordingMsg")[0];
+            modal.style.display = "block";
+            // modal.classList.add('fadeOut');
 
         }).catch(function(err) {
             // enable the record button if getUserMedia() fails
@@ -154,16 +166,6 @@ export function stopRecording() {
 
 setInterval(function(){
     if (isRecording) {
-        console.log("here", clicked);
-        if (clicked) {
-            rec.stop();
-            isRecording = false;
-            // stop microphone access
-            gumStream.getAudioTracks()[0].stop();
-            clicked = false;
-        } else {
-            rec.exportWAV(handleDataAvailable);
-        }
-        
+        rec.exportWAV(handleDataAvailable);
     }
 }, 1000);//wait 2 seconds
