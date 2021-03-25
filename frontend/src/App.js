@@ -6,6 +6,7 @@ import { Widget, addResponseMessage, setQuickButtons, toggleWidget, toggleMsgLoa
 import {ActionProvider} from './ActionProvider'
 import {postToGoogle} from './googleApi'
 
+
 const App = (props) => {
   var currMessage;
   var failCount;
@@ -99,6 +100,9 @@ const App = (props) => {
     google.style.display = "none";
     var widgetContainer = document.getElementsByClassName("rcw-widget-container")[0];
     widgetContainer.style.width = "100%";
+
+    // stop recording if the recorder is recording
+    // stopRecording();
 
     // reset all quich buttons
     setQuickButtons([]);

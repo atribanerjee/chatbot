@@ -10,7 +10,6 @@ var isRecording = false;
 // shim for AudioContext when it's not avb.
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext //audio context to help us record
-
 var rcwSender = document.getElementsByClassName("rcw-sender")[0];
 var voiceButton = document.createElement("DIV");
 var voiceImage = document.createElement("IMG");
@@ -21,6 +20,11 @@ voiceButton.onclick = recording;
 
 voiceButton.appendChild(voiceImage);
 rcwSender.insertBefore(voiceButton, rcwSender.firstChild);
+
+var clicked = false;
+document.getElementsByClassName('rcw-send')[0].addEventListener("click", function() {
+   clicked = true;
+});
 
 function recording() {
     // console.log("voiceButton clicked");
@@ -113,7 +117,11 @@ function handleDataAvailable(blob) {
             var transcript = alt[0]['transcript'];
             console.log(transcript);
             var userInput = document.getElementsByClassName("rcw-new-message")[0];
-            userInput.value = transcript;
+            if (isRecording) {
+                userInput.value = transcript;
+            } else {
+                userInput.value = "";
+            }
         }
     })
     .catch(err => console.error(err));
@@ -138,9 +146,24 @@ function getCookie(name) {
     return cookieValue;
 }
 
+export function stopRecording() {
+    if (isRecording) {
+        rec.stop();
+    }
+}
 
 setInterval(function(){
     if (isRecording) {
-        rec.exportWAV(handleDataAvailable);
+        console.log("here", clicked);
+        if (clicked) {
+            rec.stop();
+            isRecording = false;
+            // stop microphone access
+            gumStream.getAudioTracks()[0].stop();
+            clicked = false;
+        } else {
+            rec.exportWAV(handleDataAvailable);
+        }
+        
     }
 }, 1000);//wait 2 seconds
