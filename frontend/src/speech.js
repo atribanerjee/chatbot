@@ -97,6 +97,8 @@ function recording() {
 
         //create the wav blob and pass it on to handleDataAvailable
         rec.exportWAV(handleDataAvailable);
+        var modal = document.getElementsByClassName("recordingMsg")[0];
+        modal.style.display = "none";
     }
 }
 
