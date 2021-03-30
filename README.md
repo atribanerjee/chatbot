@@ -56,5 +56,6 @@ npm run dev
 - Audio button
     * not as smooth, might be better to use websocket (the program is currently using polling to get real time transcript)
     * Mixed content issue: recorder.js used requires https but GPT3 is currently using http. The user has to enable mixed content in order to make it work (can be done on Chrome and Firefox)
+    * Audio should be sent to the server when there is a pause in the speech (ideally)
 - Backend:
     * add more feature using the audio data
