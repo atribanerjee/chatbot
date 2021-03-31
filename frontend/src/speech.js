@@ -205,7 +205,6 @@ function connect() {
         // Do the appropriate steps on each event.
         let data = JSON.parse(e.data);
         data = data["payload"];
-        console.log(data);
         if (!isRecording) return;
         var alt = data["message"]["alternative"];
         if (data["transcript"]) {
