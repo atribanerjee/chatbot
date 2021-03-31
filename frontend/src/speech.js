@@ -118,7 +118,7 @@ function handleDataAvailable(blob) {
     fd.append("audio_data", blob);
 
     // use websocket
-    gameSocket.send(blob);
+    if (isRecording) gameSocket.send(blob);
 
     // send the audio file to server
     // fetch("/speech/", {
@@ -205,6 +205,8 @@ function connect() {
         // Do the appropriate steps on each event.
         let data = JSON.parse(e.data);
         data = data["payload"];
+        console.log(data);
+        if (!isRecording) return;
         var alt = data["message"]["alternative"];
         if (data["transcript"]) {
             if (alt != undefined) {
@@ -218,7 +220,6 @@ function connect() {
                 }
             }
         }
-        
     };
 
     if (gameSocket.readyState == WebSocket.OPEN) {
