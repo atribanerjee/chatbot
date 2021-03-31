@@ -1,4 +1,5 @@
 import voicebutton from './doc/voicebutton.jpeg';
+
 //webkitURL is deprecated but nevertheless
 URL = window.URL || window.webkitURL;
 
@@ -6,6 +7,11 @@ var gumStream;                      //stream from getUserMedia()
 var rec;                            //Recorder.js object
 var input;                          //MediaStreamAudioSourceNode we'll be recording
 var isRecording = false;
+
+// Socket global variable
+var roomCode = 1;
+var connectionString = 'ws://' + window.location.host + '/ws/speechsocket/' + roomCode + '/';
+var gameSocket = new WebSocket(connectionString);
 
 // shim for AudioContext when it's not avb.
 var AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -59,6 +65,7 @@ function recording() {
 
             */
             audioContext = new AudioContext();
+            console.log("here", audioContext.sampleRate);
 
             /*  assign to gumStream for later use  */
             gumStream = stream;
@@ -106,39 +113,41 @@ function handleDataAvailable(blob) {
     // console.log("data-available");
 
     let csrftoken = getCookie('csrftoken');
-    console.log("CSRFtoken: " + csrftoken);
 
     var fd=new FormData();
     fd.append("audio_data", blob);
 
+    // use websocket
+    gameSocket.send(blob);
+
     // send the audio file to server
-    fetch("/speech/", {
-        method:"POST", 
-        credentials: 'same-origin',
-        headers: { "X-CSRFToken": csrftoken },
-        body:fd
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        var alt = data['alternative'];
-        console.log(data);
-        if (alt != undefined) {
-            var transcript = alt[0]['transcript'];
-            console.log(transcript);
-            var userInput = document.getElementsByClassName("rcw-new-message")[0];
-            if (isRecording) {
-                userInput.value = transcript;
-            } else {
-                userInput.value = "";
-            }
-        }
-    })
-    .catch(err => console.error(err));
+    // fetch("/speech/", {
+    //     method:"POST", 
+    //     credentials: 'same-origin',
+    //     headers: { "X-CSRFToken": csrftoken },
+    //     body:fd
+    // })
+    // .then(response => {
+    //     if (!response.ok) {
+    //         throw new Error('Network response was not ok');
+    //     }
+    //     return response.json();
+    // })
+    // .then(data => {
+    //     var alt = data['alternative'];
+    //     console.log(data);
+    //     if (alt != undefined) {
+    //         var transcript = alt[0]['transcript'];
+    //         console.log(transcript);
+    //         var userInput = document.getElementsByClassName("rcw-new-message")[0];
+    //         if (isRecording) {
+    //             userInput.value = transcript;
+    //         } else {
+    //             userInput.value = "";
+    //         }
+    //     }
+    // })
+    // .catch(err => console.error(err));
 }
 
 // https://stackoverflow.com/questions/43606056/proper-django-csrf-validation-using-fetch-post-request
@@ -170,4 +179,52 @@ setInterval(function(){
     if (isRecording) {
         rec.exportWAV(handleDataAvailable);
     }
-}, 1000);//wait 2 seconds
+}, 500);//wait 2 seconds
+
+// Main function which handles the connection
+// of websocket.
+function connect() {
+    gameSocket.onopen = function open() {
+        console.log('WebSockets connection created.');
+        // on websocket open, send the START event.
+        gameSocket.send(JSON.stringify({
+            "event": "START",
+            "message": ""
+        }));
+    };
+
+    gameSocket.onclose = function (e) {
+        console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
+        setTimeout(function () {
+            connect();
+        }, 1000);
+    };
+    // Sending the info about the room
+    gameSocket.onmessage = function (e) {
+        // On getting the message from the server
+        // Do the appropriate steps on each event.
+        let data = JSON.parse(e.data);
+        data = data["payload"];
+        var alt = data["message"]["alternative"];
+        if (data["transcript"]) {
+            if (alt != undefined) {
+                var transcript = alt[0]['transcript'];
+                console.log(transcript);
+                var userInput = document.getElementsByClassName("rcw-new-message")[0];
+                if (isRecording) {
+                    userInput.value = transcript;
+                } else {
+                    userInput.value = "";
+                }
+            }
+        }
+        
+    };
+
+    if (gameSocket.readyState == WebSocket.OPEN) {
+        gameSocket.onopen();
+    }
+}
+
+//call the connect function at the start.
+connect();
