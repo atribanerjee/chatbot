@@ -41,7 +41,7 @@ class AudioConsumer(AsyncWebsocketConsumer):
         await self.channel_layer.group_send(self.room_group_name, {
             'type': 'send_message',
             'message': message,
-            'event': "START",
+            'event': "Sending data from server",
             'transcript': flag,
         })
 

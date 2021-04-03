@@ -3,15 +3,18 @@ import voicebutton from './doc/voicebutton.jpeg';
 //webkitURL is deprecated but nevertheless
 URL = window.URL || window.webkitURL;
 
-var gumStream;                      //stream from getUserMedia()
-var rec;                            //Recorder.js object
-var input;                          //MediaStreamAudioSourceNode we'll be recording
-var isRecording = false;
+var gumStream;                      // stream from getUserMedia()
+var rec;                            // Recorder.js object
+var input;                          // MediaStreamAudioSourceNode we'll be recording
+var isRecording = false;            // check if it is in recording mode
+var cond = false;                   // check if the data from server is for the next transcript
+var finalizeTrancript = ""          // keep track of current message
+var count = 0                       // count if the transcript is not able to finalize for a long time
 
 // Socket global variable
 var roomCode = 1;
 var connectionString = 'ws://' + window.location.host + '/ws/speechsocket/' + roomCode + '/';
-var gameSocket = new WebSocket(connectionString);
+var socket = new WebSocket(connectionString);
 
 // shim for AudioContext when it's not avb.
 var AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -30,7 +33,11 @@ rcwSender.insertBefore(voiceButton, rcwSender.firstChild);
 
 document.getElementsByClassName('rcw-send')[0].addEventListener("click", function() {
     rec.stop();
+    rec.clear();
     isRecording = false;
+    cond = false;
+    finalizeTrancript = "";
+    count = 0;
 
     // stop microphone access
     gumStream.getAudioTracks()[0].stop();
@@ -83,7 +90,13 @@ function recording() {
             // start the recording process
             rec.record();
             isRecording = true;
-            // console.log("Recording started");
+            
+            // Send start message to server
+            // on websocket open, send the START event.
+            socket.send(JSON.stringify({
+                "event": "Sending data from client",
+                "message": "START"
+            }));
 
             var modal = document.getElementsByClassName("recordingMsg")[0];
             modal.style.display = "block";
@@ -97,7 +110,11 @@ function recording() {
     } else {
         // tell the recorder to stop the recording
         rec.stop();
+        rec.clear();
         isRecording = false;
+        cond = false;
+        finalizeTrancript = "";
+        count = 0;
 
         // stop microphone access
         gumStream.getAudioTracks()[0].stop();
@@ -118,8 +135,9 @@ function handleDataAvailable(blob) {
     fd.append("audio_data", blob);
 
     // use websocket
-    if (isRecording) gameSocket.send(blob);
+    if (isRecording) socket.send(blob);
 
+    // This section of code is not used, using websocket to send blob data to server
     // send the audio file to server
     // fetch("/speech/", {
     //     method:"POST", 
@@ -169,60 +187,80 @@ function getCookie(name) {
     return cookieValue;
 }
 
-export function stopRecording() {
-    if (isRecording) {
-        rec.stop();
-    }
-}
-
+// This functino will let the client sends the audio data to the server for transcript
+// every second (best performance tested) in order to get real time transcript
 setInterval(function(){
     if (isRecording) {
         rec.exportWAV(handleDataAvailable);
     }
-}, 500);//wait 2 seconds
+}, 1000);//wait 2 seconds
 
 // Main function which handles the connection
 // of websocket.
 function connect() {
-    gameSocket.onopen = function open() {
+    socket.onopen = function open() {
         console.log('WebSockets connection created.');
         // on websocket open, send the START event.
-        gameSocket.send(JSON.stringify({
-            "event": "START",
-            "message": ""
+        socket.send(JSON.stringify({
+            "event": "Sending data from client",
+            "message": "connection successful"
         }));
     };
 
-    gameSocket.onclose = function (e) {
+    socket.onclose = function (e) {
         console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
         setTimeout(function () {
             connect();
         }, 1000);
     };
     // Sending the info about the room
-    gameSocket.onmessage = function (e) {
+    socket.onmessage = function (e) {
         // On getting the message from the server
         // Do the appropriate steps on each event.
         let data = JSON.parse(e.data);
         data = data["payload"];
-        if (!isRecording) return;
-        var alt = data["message"]["alternative"];
-        if (data["transcript"]) {
-            if (alt != undefined) {
-                var transcript = alt[0]['transcript'];
-                console.log(transcript);
-                var userInput = document.getElementsByClassName("rcw-new-message")[0];
-                if (isRecording) {
-                    userInput.value = transcript;
-                } else {
-                    userInput.value = "";
+        console.log("Data: ", data);
+        // if (!isRecording) return;
+        if (data["message"] == "START") cond = true;
+        if (cond) {
+            var alt = data["message"]["alternative"];
+            // console.log("Alternative: ", alt)
+            if (data["transcript"]) {
+                if (alt != undefined) {
+                    var transcript = alt[0]['transcript'];
+                    console.log(transcript);
+                    console.log(alt[0]['confidence']);
+                    count += 1;
+                    var userInput = document.getElementsByClassName("rcw-new-message")[0];
+                    if (isRecording) {
+                        userInput.value = finalizeTrancript + " " + transcript;
+                    } else {
+                        userInput.value = "";
+                        finalizeTrancript = "";
+                    }
+                    if (alt[0]['confidence'] > 0.9 || transcript.length > 30 || count > 10) {
+                        // make a pause, restart the recording
+                        // to reduce the size of the data sending to server
+                        // and reduce latentcy
+                        console.log("Finalize intermediate transcript");
+                        // rec.stop();
+                        rec.clear();
+                        // rec.record();
+                        finalizeTrancript += " " + transcript;
+                        cond = false;
+                        socket.send(JSON.stringify({
+                            "event": "Sending data from client",
+                            "message": "START"
+                        }));
+                        count = 0;
+                    }
                 }
             }
         }
     };
 
-    if (gameSocket.readyState == WebSocket.OPEN) {
-        gameSocket.onopen();
+    if (socket.readyState == WebSocket.OPEN) {
+        socket.onopen();
     }
 }
 
